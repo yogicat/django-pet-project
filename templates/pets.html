@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Meet the gangs</h1>
+{% if object_list %}
+{% for pet in object_list %}
+  <div>
+    <p><a href="{% url 'pet_detail' pet.pk %}">{{ pet.name }}</a></p>
+    <p>{{ pet.owner.name }}</p>
+    <p>{{ pet.animal }}</p>
+    <div>
+      <a href="{% url 'pet_edit' pet.pk %}">Edit </a>
+      <a href="{% url 'pet_delete' pet.pk %}">Delete</a>
+    </div>
+  </div>
+
+{% else %}
+  <div>No pets T.T</div>
+{% endif %}
+{% endblock %}
