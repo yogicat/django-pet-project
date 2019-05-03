@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+  <h2>{{ object.name }}</h2>
+  <p>{{ object.owner }}</p>
+  <p>{{ object.birthday }}</p>
+</div>
+<div>
+  <button><a href="{% url 'pet_edit' pet.pk %}">Edit</a></button>
+  <button><a href="{% url 'pet_delete' pet.pk %}">Delete</a></button>
+  <button><a href="{% url 'pets' %}">Back to List</a></button>
+</div>
+{% endblock content %}
