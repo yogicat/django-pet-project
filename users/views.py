@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, DetailView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
+from pets.models import Pet
 
 
 class SignUp(CreateView):
@@ -14,18 +15,25 @@ class SignUp(CreateView):
     template_name = 'signup.html'
 
 
-class DashboardView(LoginRequiredMixin, TemplateView):
-
-    template_name = "dashboard.html"
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    template_name = "profile.html"
     login_url = 'login'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(DashboardView, self).get_context_data(*args, **kwargs)
-        context['user'] = self.request.user
+        context = super(UserProfileView, self).get_context_data(
+            *args, **kwargs)
+        context['pets'] = Pet.objects.filter(owner=self.request.user)
+
         return context
 
 
-class DashboardUpdateView(LoginRequiredMixin,  UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = CustomUser
-    template_name = 'dashboard_edit.html'
+    form_class = CustomUserChangeForm
+    template_name = "profile_edit.html"
+    success_url = reverse_lazy('home')
     login_url = 'login'
+
+    def get_object(self):
+        return self.request.user

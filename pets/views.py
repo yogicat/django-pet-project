@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Pet
-from .forms import PetCreateForm
+from .forms import PetCreateForm, PetChangeForm
 
 
 class Pets(LoginRequiredMixin, ListView):
@@ -22,10 +22,16 @@ class PetDetailView(LoginRequiredMixin, DetailView):
     template_name = 'pet_detail.html'
     login_url = 'login'
 
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Pet.objects.filter(owner=self.request.user)
+        else:
+            return Pet.objects.none()
+
 
 class PetUpdateView(LoginRequiredMixin, UpdateView):
     model = Pet
-    fields = ['name', 'birthday', ]
+    form_class = PetChangeForm
     template_name = 'pet_edit.html'
     login_url = 'login'
 

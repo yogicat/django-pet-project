@@ -1,27 +1,44 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Home{% endblock  %}
-
 {% block content %}
-{% if user.is_authenticated %}
-Hi {{ user.name }}
-<p><a href="{% url 'logout' %}">Your Pet</a></p>
-<p><a href="{% url 'logout' %}">Logout</a></p>
-{% else %}
-<p>You are not logged in</p>
-<p><a href="{% url 'login' %}">LogIn</a></p>
-<p><a href="{% url 'signup' %}">ignup</a></p>
+<div class="cf relative">
+  <div class="w-100 w-40-l fl center h-vh fixed-box">
+    <div class="left-block bg-yellow pa4">
+      <h2 class="f1 fw1 tc">Coolest way to make friends for your pets <br />🐕 🐈 🐩</h2>
+      <p class="f5 lh-copy">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dolor lectus, pharetra ut porta nec, dictum at
+        metus. Pellentesque fringilla luctus erat, vel interdum eros gravida nec. Donec sodales dapibus odio sit amet
+        accumsan. Integer mauris dolor, convallis molestie felis at, consectetur viverra mi. Cras nulla metus, ultricies
+        nec porta sed, imperdiet sed purus. Mauris ut eros malesuada, placerat nulla in, ornare urna. Duis eu ipsum sed
+        purus scelerisque imperdiet. Nulla pretium ante scelerisque pharetra volutpat. Etiam pellentesque non leo id
+        pellentesque. Nulla semper sit amet dolor eget ultrices. Curabitur pharetra elementum vulputate. Pellentesque
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean sit amet nulla sed urna
+        tempus molestie. Vestibulum volutpat imperdiet vulputate.
 
-
-{% for pet in pets %}
-<div>
-    <p><a href="{% url 'pet_detail' pet.pk %}">{{ pet.name }}</a></p>
-    <p>{{ pet.owner.name }}</p>
-    <p>{{ pet.animal }}</p>
-    <div>
-      <a href="{% url 'pet_edit' pet.pk %}">Edit </a>
-      <a href="{% url 'pet_delete' pet.pk %}">Delete</a>
+        Duis pretium eros sed mi pulvinar efficitur ac sit amet augue. Proin velit justo, tristique eget pulvinar non,
+        porta ut erat. Vivamus ut tortor velit. Nunc at semper leo. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Nullam at facilisis dolor. Fusce pretium laoreet nisi eget posuere. Aenean vitae molestie lectus.
+        Curabitur nulla sapien, pulvinar faucibus vehicula in, maximus vel ligula. Vestibulum ante ipsum primis in
+        faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget nibh in nisl placerat venenatis id sit amet
+        tellus. Donec ac commodo justo.
+      </p>
     </div>
   </div>
-{% endfor %}
+  <div class="w-100 w-60-l fr ma0-l pl2-l">
+    <div class="cf">
+      <h1 class="f2 fw2 pa2">Meet our members!</h1>
+      {% for pet in pets %}
+      <article class="fl w-50 w-33-m w-33-l pa2 pet-item">
+        <div class=" Pet db center bg-white">
+          <img src="http://tachyons.io/img/avatar_1.jpg" class="w-100 db center">
+          <h1 class="f3 fw4 mb2">{{ pet.name }}</h1>
+          <h2 class="f6 fw2 black-90 mt0">with {{ pet.owner.name }}</h2>
+          <h2 class="f6 fw2 black-90 mt0">{{ pet.animal }}</h2>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock  %}
