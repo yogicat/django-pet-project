@@ -1,13 +1,14 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
 
 class Pet(models.Model):
     ANIMAL_TYPE_CHOICES = (
-        ('강아지', '강아지'),
-        ('고양이', '고양이'),
-        ('기타', '기타')
+        ('Dog', 'Dog'),
+        ('Cat', 'Cat'),
+        ('Other', 'Other')
     )
 
     name = models.CharField(max_length=50)
@@ -27,3 +28,12 @@ class Pet(models.Model):
 
     def get_absolute_url(self):  # new
         return reverse('pet_detail', args=[str(self.id)])
+
+    def clean(self):
+        if self.is_main:
+            active = Pet.objects.filter(is_main=True, owner=self.owner)
+            if self.pk:
+                active = active.exclude(pk=self.pk)
+            if active.exists():
+                raise ValidationError(
+                    "You already have a main pet.")
