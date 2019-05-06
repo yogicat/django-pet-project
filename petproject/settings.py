@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_extensions',
-
     'users',
     'pets',
     'pages',
+
+    'django_extensions',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,14 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# django blog vars
+AWS_ACCESS_KEY_ID = "AKIATGCVHGDBXW65LP7M"
+AWS_STORAGE_BUCKET_NAME = "django-happy-pets"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_SIGNATURE_VERSION: "s3v4"
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
