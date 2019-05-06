@@ -5,7 +5,7 @@
   <article class="fl w-100 pa2 pet-item center">
     <h2 class="f1 fw2">{{ object.name }}</h2>
     <div class=" Pet db center bg-white">
-      <img src="http://tachyons.io/img/avatar_1.jpg" class="w-100 db center">
+      <img src="{{ pet.photo.url }}" class="w-100 db center">
       <div class="mt4">
         <p class="f5 fw2 black-90 mt0"><span class="f6 fw4 pr3">OWNER</span>{{ object.owner.name }}</p>
         <p class="f5 fw2 black-90 mt0"><span class="f6 fw4 pr3">TYPE</span>{{ object.animal }}</p>
