@@ -18,7 +18,7 @@ class Pet(models.Model):
     birthday = models.DateField(auto_now_add=False, null=True, blank=True)
     animal = models.CharField(
         max_length=50, blank=True, choices=ANIMAL_TYPE_CHOICES)
-    photo = models.ImageField(upload_to='_pet_pics',
+    photo = models.ImageField(upload_to='pets',
                               default='default.jpg', blank=True)
     registration_number = models.CharField(max_length=50, blank=True)
     diseases_info = JSONField(encoder="", default=dict, blank=True)
