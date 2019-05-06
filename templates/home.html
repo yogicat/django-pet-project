@@ -4,7 +4,7 @@
 {% block content %}
 <div class="cf relative">
   <div class="w-100 w-40-l fl center h-vh fixed-box">
-    <div class="left-block bg-yellow pa4">
+    <div class="left-block bg-yellow pa4 flex flex-column justify-center">
       <h2 class="f1 fw1 tc">Join happy pets club<br />🐕 🐈 🐩</h2>
       <p class="f4 lh-copy">
         We are coolest pet community in town.
@@ -17,10 +17,12 @@
       {% for pet in pets %}
       <article class="fl w-50 w-33-m w-33-l pa2 pet-item">
         <div class=" Pet db center bg-white">
-          <img src="{{ pet.photo.url }}" class="w-100 db center">
-          <h1 class="f3 fw4 mb2">{{ pet.name }}</h1>
-          <h2 class="f6 fw2 black-90 mt0">with {{ pet.owner.name }}</h2>
-          <h2 class="f6 fw2 black-90 mt0">{{ pet.animal }}</h2>
+          <a href="{% url 'pet_detail' pet.pk %}">
+            <img src="{{ pet.photo.url }}" class="w-100 db center">
+            <h1 class="f3 fw4 mb2">{{ pet.name }}</h1>
+            <h2 class="f6 fw2 black-90 mt0">with {{ pet.owner.name }}</h2>
+            <h2 class="f6 fw2 black-90 mt0">{{ pet.animal }}</h2>
+          </a>
         </div>
       </article>
       {% endfor %}
