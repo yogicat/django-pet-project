@@ -17,7 +17,7 @@
       {% for pet in pets %}
       <article class="fl w-50 w-33-m w-33-l pa2 pet-item">
         <div class=" Pet db center bg-white">
-          <a href="{% url 'pet_detail' pet.pk %}">
+          <a href="{% url 'pet_detail' pet.pk %}" class="link black">
             <img src="{{ pet.photo.url }}" class="w-100 db center">
             <h1 class="f3 fw4 mb2">{{ pet.name }}</h1>
             <h2 class="f6 fw2 black-90 mt0">with {{ pet.owner.name }}</h2>
