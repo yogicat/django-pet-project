@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fj5&u#0)zpv*!$jp&pno2xd#+nb)=6m4gpea&al=mqovwcz6s9'
+# SECRET_KEY = 'fj5&u#0)zpv*!$jp&pno2xd#+nb)=6m4gpea&al=mqovwcz6s9'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 # Application definition
 
@@ -143,9 +144,9 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 # django blog vars
-AWS_ACCESS_KEY_ID = "AKIATGCVHGDBXW65LP7M"
-AWS_STORAGE_BUCKET_NAME = "django-happy-pets"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_S3_REGION_NAME = 'ap-northeast-2'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
