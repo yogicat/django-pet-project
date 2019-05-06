@@ -6,7 +6,6 @@ from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, primary_key=True)
-
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=12, unique=True, null=True)
     zipcode = models.CharField(max_length=6, blank=True)

@@ -15,9 +15,8 @@
       </div>
     </div>
     <div class="mt4">
-      <button class="bb br0 bw1 pv1 ph2 dib">
-        <a href="{% url 'profile_edit' user.pk %}" class="link black dim">EDIT</a>
-      </button>
+      <button class="tc link dim bg-yellow ba b--black bw1 mr3 br4 ba f5 fw2"><a href="{% url 'profile_edit' user.pk %}"
+      class="link black dim pv2 ph4 dib">Edit</a></button>
     </div>
   </article>
   <h1 class="f1 fw2 mt4 mb0">My Pet List</h1>
@@ -43,8 +42,8 @@
     {% endfor %}
   </div>
   {% else %}
-  <div>You have no registered pets T.T</div>
-  <button class="tc link dim bg-yellow ba b--black bw1 mr3 br4 ba f5 fw2"><a href="{% url 'pet_new' %}"
+  <div class="mt5">You have no registered pets T.T</div>
+  <button class="tc link dim bg-yellow ba b--black bw1 mr3 br4 ba f5 fw2 mt4"><a href="{% url 'pet_new' %}"
       class="link black dim pv2 ph4 dib">Add Pet</a></button>
   {% endif %}
 </div>

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
@@ -17,16 +18,18 @@ class Pet(models.Model):
     birthday = models.DateField(auto_now_add=False, null=True, blank=True)
     animal = models.CharField(
         max_length=50, blank=True, choices=ANIMAL_TYPE_CHOICES)
+    photo = models.ImageField(upload_to='_pet_pics',
+                              default='default.jpg', blank=True)
     registration_number = models.CharField(max_length=50, blank=True)
-    diseases_info = models.CharField(max_length=200, blank=True)
-    allergies_info = models.CharField(max_length=200, blank=True)
-    preferences = models.CharField(max_length=200, blank=True)
+    diseases_info = JSONField(encoder="", default=dict, blank=True)
+    allergies_info = JSONField(encoder="", default=dict, blank=True)
+    preferences = JSONField(encoder="", default=dict, blank=True)
     is_main = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):  # new
+    def get_absolute_url(self):
         return reverse('pet_detail', args=[str(self.id)])
 
     def clean(self):
