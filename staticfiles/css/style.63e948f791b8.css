@@ -6,7 +6,7 @@ button {
 
 @media screen and (min-width: 60em) {
   .left-block {
-    min-height: calc(100vh - 12rem);
+    min-height: calc(100vh);
     max-width: 38rem;
   }
 
@@ -18,13 +18,14 @@ button {
   }
 }
 
-
-
 .pet-item {
   height: 26rem;
+  transition: opacity 0.5s ease;
 }
 
-.signup-page {}
+.pet-item:hover {
+  opacity: 0.6;
+}
 
 .my-form-group label {
   padding-bottom: 0.25rem;

@@ -18,13 +18,14 @@ button {
   }
 }
 
-
-
 .pet-item {
   height: 26rem;
+  transition: opacity 0.5s ease;
 }
 
-.signup-page {}
+.pet-item:hover {
+  opacity: 0.6;
+}
 
 .my-form-group label {
   padding-bottom: 0.25rem;

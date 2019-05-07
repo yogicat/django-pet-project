@@ -25,7 +25,7 @@
     {% for pet in pets %}
     <article class="center pa2 mv3 fl w-50 w-33-m w-20-l">
       <div class="Pet db tc center pv3 bg-yellow">
-        <img src="http://tachyons.io/img/avatar_1.jpg" class="w-100 db center">
+        <img src="{{ pet.photo.url }}" class="w-100 db center">
         <h1 class="f5 fw4 mb2 h2"><a href="{% url 'pet_detail' pet.pk %}" class="link black dim">{{ pet.name }}</a>
           {% if pet.is_main %}
           <span class="f6 fw4 bg-black white br4 dib ph2 pv1">main</span>

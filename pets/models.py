@@ -6,20 +6,13 @@ from django.urls import reverse
 
 
 class Pet(models.Model):
-    ANIMAL_TYPE_CHOICES = (
-        ('Dog', 'Dog'),
-        ('Cat', 'Cat'),
-        ('Other', 'Other')
-    )
+    ANIMAL_TYPE_CHOICES = (("Dog", "Dog"), ("Cat", "Cat"), ("Other", "Other"))
 
     name = models.CharField(max_length=50)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
-                              on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     birthday = models.DateField(auto_now_add=False, null=True, blank=True)
-    animal = models.CharField(
-        max_length=50, blank=True, choices=ANIMAL_TYPE_CHOICES)
-    photo = models.ImageField(upload_to='pets',
-                              default='default.jpg', blank=True)
+    animal = models.CharField(max_length=50, blank=True, choices=ANIMAL_TYPE_CHOICES)
+    photo = models.ImageField(upload_to="pets", default="default.jpg", blank=True)
     registration_number = models.CharField(max_length=50, blank=True)
     diseases_info = JSONField(encoder="", default=dict, blank=True)
     allergies_info = JSONField(encoder="", default=dict, blank=True)
@@ -30,7 +23,7 @@ class Pet(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('pet_detail', args=[str(self.id)])
+        return reverse("pet_detail", args=[str(self.id)])
 
     def clean(self):
         if self.is_main:
@@ -38,5 +31,4 @@ class Pet(models.Model):
             if self.pk:
                 active = active.exclude(pk=self.pk)
             if active.exists():
-                raise ValidationError(
-                    "You already have a main pet.")
+                raise ValidationError("You already have a main pet.")
