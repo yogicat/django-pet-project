@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +28,8 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBBUG_VALUE") == "True"
+# DEBUG = os.environ.get("DEBBUG_VALUE") == "True"
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
 
@@ -84,9 +86,9 @@ WSGI_APPLICATION = "petproject.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "petproject",
-        "USER": "yogicat",
+        "USER": "name",
         "PASSWORD": "",
         "HOST": "localhost",
     }
@@ -147,4 +149,6 @@ AWS_S3_SIGNATURE_VERSION: "s3v4"
 AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
